@@ -4,9 +4,9 @@ import foto from "./assets/foto.jpg";
 const NAV = ["About", "Skills", "Experience", "Education", "Contact"];
 
 const SKILLS_TECH = [
-  "Laravel 10", "Tailwind CSS", "React", "Frontend Dev",
   "Jaringan LAN", "Mikrotik", "IT Support", "Git",
-  "MS Office", "Canva", "Hardware PC", "Troubleshooting",
+  "MS Office", "Canva", "Hardware PC", "Troubleshooting" ,"Software PC",
+  "Laravel", "Tailwind CSS", "React", "Frontend Dev",
 ];
 
 const SKILLS_SOFT = [
@@ -24,6 +24,12 @@ const EXPERIENCES = [
   { role: "Magang Fullstack Web Developer", company: "PT Arkatama Solusindo · BNSP", period: "Jan – Jun 2023", desc: "Website toko online: Laravel 10 + Tailwind CSS. Fitur manajemen produk, keranjang belanja, checkout, autentikasi, Git.", accent: "purple" },
   { role: "Staff IT – PKL", company: "Universitas Bina Darma", period: "Apr – Agu 2018", desc: "Operasional IT kampus, pengawasan jaringan LAN, pendataan aset IT, dan dokumentasi.", accent: "blue" },
 ];
+
+const  EDUCATION = [
+  { education: "Sarjana Teknik Informatika", universitas: "Indo Global Mandiri University — Palembang ", years: "2020 - 2024", coursework: "Mata Kuliah Relevan :  IT Support,Computer Networking, Operating Systems, atau Hardware Troubleshooting.", accent: "blue" },
+  { education: "Teknik Komputer dan Jaringan", universitas: "SMK NEGERI 8 PALEMBANG ", years: "2017 - 2019", coursework: "Mata Kuliah Relevan :  Administrasi Infrastruktur Jaringan, Perakitan Komputer, atau Keamanan Jaringan.", accent: "purple" },
+];
+
 
 function getTheme(dark) {
   return dark ? {
@@ -200,36 +206,39 @@ function About({ dark }) {
 
       {/* Tagline */}
       <p style={{
-        fontSize: 11, letterSpacing: 4, color: t.accent1, textTransform: "uppercase",
+        fontSize: 15, letterSpacing: 4, color: t.accent1, textTransform: "uppercase",
         opacity: show ? 1 : 0,
         transform: show ? "translateY(0)" : "translateY(10px)",
         transition: "all 0.5s ease 0.5s",
       }}>
-        IT Professional · Web Developer
+      IT Support
       </p>
 
       {/* Bio */}
       <p style={{
-        fontSize: 13, color: t.textSub, maxWidth: 540, lineHeight: 1.8,
+        fontSize: 15, color: t.textSub, maxWidth: 540, lineHeight: 1.8,
         opacity: show ? 1 : 0,
         transform: show ? "translateY(0)" : "translateY(10px)",
         transition: "all 0.5s ease 0.7s",
       }}>
-        Lulusan Sarjana Teknik Informatika dengan pengalaman di IT Support,
-        Web Development fullstack, dan Production Admin. Kombinasi keahlian
-        teknis dan administratif yang solid dengan IPK 3.47.
+        Lulusan Sarjana Teknik Informatika yang memiliki pengalaman kerja sebagai Production Operator
+        & Admin di industri manufaktur. Memiliki kombinasi keahlian teknis dalam operasional mesin,
+        ketelitian administratif, serta pemahaman mendalam pada perangkat keras dan lunak komputer.
+        Terbiasa bekerja dengan target produksi, mahir menggunakan software pendukung (Canva/MS
+        Office), dan memiliki kemampuan troubleshooting yang cepat untuk memastikan kelancaran
+        proses produksi digital.
       </p>
 
       {/* Contact pills */}
       <div style={{
-        display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap",
-        opacity: show ? 1 : 0,
+        display: "flex", gap: 15, justifyContent: "center", flexWrap: "wrap",
+        opacity: show ? 2 : 0,
         transform: show ? "translateY(0)" : "translateY(10px)",
         transition: "all 0.5s ease 0.9s",
       }}>
         {["085171682004", "riskypranata2020@gmail.com", "Palembang, Sumsel"].map((c) => (
           <span key={c} style={{
-            fontSize: 11, padding: "5px 14px",
+            fontSize: 15, padding: "5px 14px",
             border: `0.5px solid ${t.accent1}44`,
             borderRadius: 20, color: t.accent1, background: t.accent1 + "0d",
           }}>
@@ -330,20 +339,26 @@ function Education({ dark }) {
   return (
     <section className="px-6 pb-12">
       <p className="text-xs tracking-[3px] uppercase mb-4" style={{ color: t.accent1 }}>Pendidikan</p>
-      <div className="rounded-xl p-6"
-        style={{ background: t.card, border: `0.5px solid ${t.cardBorder}`, borderLeft: `2px solid ${t.accent2}` }}>
-        <h3 className="text-base font-medium" style={{ color: t.text }}>Sarjana Teknik Informatika</h3>
-        <p className="text-xs mt-1" style={{ color: t.textMuted }}>Indo Global Mandiri University — Palembang · 2020–2024</p>
-        <p className="text-xs mt-1 mb-3" style={{ color: t.textMuted }}>
-          Grafika Komputer · Jaringan Komputer · Arsitektur Komputer · Interaksi Manusia & Komputer
-        </p>
-        <span className="text-xs px-3 py-1 rounded-full" style={{ color: t.accent2, background: t.accent2 + "18" }}>
-          IPK 3.47 / 4.00
-        </span>
+      <div className="flex flex-col gap-2">
+        {EDUCATION.map((e, i) => {
+          const ac = e.accent === "color-#0077cc" ? t.accent1 : t.accent2;
+          return (
+            <div key={i} className="rounded-xl p-5 transition-all duration-200 hover:scale-[1.01]"
+              style={{ background: t.card, border: `0.5px solid ${t.cardBorder}`, borderLeft: `2px solid ${ac}` }}>
+              <div className="flex items-start justify-between flex-wrap gap-2 mb-1">
+                <span className="text-sm font-medium" style={{ color: t.text }}>{e.education}</span>
+                <span className="text-xs px-3 py-1 rounded-full" style={{ color: ac, background: ac + "18" }}>{e.years}</span>
+              </div>
+              <p className="text-xs mb-2" style={{ color: t.textMuted }}>{e.universitas}</p>
+              <p className="text-sm leading-relaxed" style={{ color: t.textSub }}>{e.coursework}</p>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
 }
+
 
 // ── Contact ───────────────────────────────────────────────────────────────────
 function Contact({ dark }) {
